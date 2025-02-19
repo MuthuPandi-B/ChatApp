@@ -251,7 +251,7 @@ const GroupChatPage = () => {
       <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         {/* Group List */}
         {!selectedGroup || windowWidth >= 768 ? (
-        <div className="w-full md:w-1/3 ${selectedGroup ? 'hidden md:block' : ''}border-r border-gray-300 overflow-y-auto">
+        <div className="w-full md:w-1/3 ${selectedGroup ? 'hidden md:block' : ''}">
           <GroupChatList onSelectGroup={handleSelectGroup} />
           <button
             onClick={() => setShowCreateModal(true)}

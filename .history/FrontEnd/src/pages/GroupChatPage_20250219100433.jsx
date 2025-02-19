@@ -73,7 +73,7 @@
 //     setMembers(members.filter((member) => member !== userId));
 //   } else {
 //     setMembers([...members, userId]);
-//   }
+//   } 
 // };
 //   return (
 //     <div className="group-chat-page">
@@ -158,45 +158,39 @@
 
 // export default GroupChatPage;
 
-import React, { useState, useEffect } from "react";
-import GroupChatList from "../components/GroupChatList";
-import GroupChatWindow from "../components/GroupChatWindow";
-import Api from "../Api/api";
-import { useNavigate } from "react-router-dom";
-import { use } from "react";
+
+import React, { useState, useEffect } from 'react';
+import GroupChatList from '../components/GroupChatList';
+import GroupChatWindow from '../components/GroupChatWindow';
+import Api from '../Api/api';
+import { useNavigate } from 'react-router-dom';
+import { use } from 'react';
 
 const GroupChatPage = () => {
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [selectedGroupName, setSelectedGroupName] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [groupName, setGroupName] = useState("");
+  const [groupName, setGroupName] = useState('');
   const [members, setMembers] = useState([]);
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  const handleSelectGroup = (groupId,groupName) => {
-    setSelectedGroupName(groupName);
+wind
+  const handleSelectGroup = (groupId) => {
     setSelectedGroup(groupId); // Set selected group for group chat
-  };
-  const handleBack = () => {
-    setSelectedGroup(null); // Go back to chat list
   };
 
   useEffect(() => {
     if (showCreateModal) {
-      Api.get("/api/users")
+      Api.get('/api/users')
         .then((response) => {
           console.log(response.data);
           setUsers(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching users", error);
+          console.error('Error fetching users', error);
         });
     }
   }, [showCreateModal]);
@@ -205,18 +199,18 @@ const GroupChatPage = () => {
     e.preventDefault();
 
     if (!groupName || !members.length) {
-      setError("Please fill all fields");
+      setError('Please fill all fields');
       return;
     }
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem('token');
       const response = await Api.post(
-        "api/groups/create",
+        'api/groups/create',
         {
           name: groupName,
           members: members, // List of members
-        }
+        },
         // {
         //   headers: {
         //     Authorization: `Bearer ${token}`,
@@ -226,14 +220,14 @@ const GroupChatPage = () => {
 
       // On success, close modal and reset form
       setShowCreateModal(false);
-      setGroupName("");
+      setGroupName('');
       setMembers([]);
-      setError("");
+      setError('');
       // Redirect to the new group page or update group list
       navigate(`/group/${response.data._id}`);
     } catch (error) {
-      console.error("Error creating group:", error);
-      setError("Error creating group, please try again later.");
+      console.error('Error creating group:', error);
+      setError('Error creating group, please try again later.');
     }
   };
 
@@ -246,37 +240,20 @@ const GroupChatPage = () => {
   };
 
   return (
-    <div className="group-chat-page flex flex-col h-full overflow-hidden">
-      {/* Main Content Area */}
-      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
-        {/* Group List */}
-        {!selectedGroup || windowWidth >= 768 ? (
-        <div className="w-full md:w-1/3 ${selectedGroup ? 'hidden md:block' : ''}border-r border-gray-300 overflow-y-auto">
+    <div className="group-chat-page">
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-1/3">
           <GroupChatList onSelectGroup={handleSelectGroup} />
           <button
             onClick={() => setShowCreateModal(true)}
             className="mt-4 bg-blue-600 text-white py-2 px-4 rounded"
           >
-            Create Group 
+            Create Group
           </button>
         </div>
-        ): null}
-        {/* Group Chat Window */}
-        {selectedGroup && (
-          <div className="w-full md:w-2/3 relative flex flex-col overflow-y-auto">
-            <div className="flex items-center bg-blue-500 text-white px-4 py-2">
-              {windowWidth < 768 && (
-                <button className="mr-2 text-lg" onClick={handleBack}>
-                  &#8592;
-                </button>
-              )}
-              <h2 className="text-lg font-semibold">{
-                selectedGroupName ? selectedGroupName: "Group Chat"}</h2>
-            </div>
-            <GroupChatWindow selectedGroup={selectedGroup}  />
-            
-          </div>
-        )}
+        <div className="w-full md:w-2/3">
+          {selectedGroup && <GroupChatWindow selectedGroup={selectedGroup} />}
+        </div>
       </div>
 
       {/* Modal for creating a group */}
@@ -286,10 +263,7 @@ const GroupChatPage = () => {
             <h2 className="text-xl font-semibold mb-4">Create New Group</h2>
             <form onSubmit={handleCreateGroup}>
               <div className="mb-4">
-                <label
-                  htmlFor="groupName"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="groupName" className="block text-sm font-medium text-gray-700">
                   Group Name
                 </label>
                 <input
@@ -301,17 +275,12 @@ const GroupChatPage = () => {
                 />
               </div>
               <div className="mb-4">
-                <label
-                  htmlFor="members"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="members" className="block text-sm font-medium text-gray-700">
                   Members
                 </label>
                 <div className="mt-1">
                   {users
-                    .filter(
-                      (user) => user._id !== localStorage.getItem("userId")
-                    )
+                    .filter((user) => user._id !== localStorage.getItem('userId'))
                     .map((user) => (
                       <div key={user._id}>
                         <input
@@ -339,7 +308,7 @@ const GroupChatPage = () => {
                   type="submit"
                   className="bg-blue-600 text-white px-4 py-2 rounded"
                 >
-                  Create Group 
+                  Create Group
                 </button>
               </div>
             </form>

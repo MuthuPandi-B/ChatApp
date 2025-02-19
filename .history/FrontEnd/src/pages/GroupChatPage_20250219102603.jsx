@@ -167,7 +167,6 @@ import { use } from "react";
 
 const GroupChatPage = () => {
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [selectedGroupName, setSelectedGroupName] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [members, setMembers] = useState([]);
@@ -180,8 +179,7 @@ const GroupChatPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const handleSelectGroup = (groupId,groupName) => {
-    setSelectedGroupName(groupName);
+  const handleSelectGroup = (groupId) => {
     setSelectedGroup(groupId); // Set selected group for group chat
   };
   const handleBack = () => {
@@ -251,16 +249,16 @@ const GroupChatPage = () => {
       <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         {/* Group List */}
         {!selectedGroup || windowWidth >= 768 ? (
-        <div className="w-full md:w-1/3 ${selectedGroup ? 'hidden md:block' : ''}border-r border-gray-300 overflow-y-auto">
+        <div className="w-full md:w-1/3">
           <GroupChatList onSelectGroup={handleSelectGroup} />
           <button
             onClick={() => setShowCreateModal(true)}
             className="mt-4 bg-blue-600 text-white py-2 px-4 rounded"
           >
-            Create Group 
+            Create Group
           </button>
         </div>
-        ): null}
+        ) : null}
         {/* Group Chat Window */}
         {selectedGroup && (
           <div className="w-full md:w-2/3 relative flex flex-col overflow-y-auto">
@@ -269,15 +267,6 @@ const GroupChatPage = () => {
                 <button className="mr-2 text-lg" onClick={handleBack}>
                   &#8592;
                 </button>
-              )}
-              <h2 className="text-lg font-semibold">{
-                selectedGroupName ? selectedGroupName: "Group Chat"}</h2>
-            </div>
-            <GroupChatWindow selectedGroup={selectedGroup}  />
-            
-          </div>
-        )}
-      </div>
 
       {/* Modal for creating a group */}
       {showCreateModal && (
@@ -339,7 +328,7 @@ const GroupChatPage = () => {
                   type="submit"
                   className="bg-blue-600 text-white px-4 py-2 rounded"
                 >
-                  Create Group 
+                  Create Group
                 </button>
               </div>
             </form>

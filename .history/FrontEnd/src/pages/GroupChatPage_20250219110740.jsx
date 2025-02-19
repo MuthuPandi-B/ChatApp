@@ -167,7 +167,6 @@ import { use } from "react";
 
 const GroupChatPage = () => {
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [selectedGroupName, setSelectedGroupName] = useState("");
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [members, setMembers] = useState([]);
@@ -180,8 +179,7 @@ const GroupChatPage = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const handleSelectGroup = (groupId,groupName) => {
-    setSelectedGroupName(groupName);
+  const handleSelectGroup = (groupId) => {
     setSelectedGroup(groupId); // Set selected group for group chat
   };
   const handleBack = () => {
@@ -250,8 +248,8 @@ const GroupChatPage = () => {
       {/* Main Content Area */}
       <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         {/* Group List */}
-        {!selectedGroup || windowWidth >= 768 ? (
-        <div className="w-full md:w-1/3 ${selectedGroup ? 'hidden md:block' : ''}border-r border-gray-300 overflow-y-auto">
+        {(!selectedGroup || windowWidth >= 768) && (
+        <div className="w-full md:w-1/3">
           <GroupChatList onSelectGroup={handleSelectGroup} />
           <button
             onClick={() => setShowCreateModal(true)}
@@ -260,7 +258,7 @@ const GroupChatPage = () => {
             Create Group 
           </button>
         </div>
-        ): null}
+        )}
         {/* Group Chat Window */}
         {selectedGroup && (
           <div className="w-full md:w-2/3 relative flex flex-col overflow-y-auto">
@@ -271,9 +269,9 @@ const GroupChatPage = () => {
                 </button>
               )}
               <h2 className="text-lg font-semibold">{
-                selectedGroupName ? selectedGroupName: "Group Chat"}</h2>
+                selectedGroup ? selectedGroup.name : "Group"}</h2>
             </div>
-            <GroupChatWindow selectedGroup={selectedGroup}  />
+            <GroupChatWindow selectedGroup={selectedGroup} />
             
           </div>
         )}

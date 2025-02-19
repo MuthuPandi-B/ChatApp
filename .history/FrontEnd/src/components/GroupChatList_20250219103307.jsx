@@ -7,7 +7,7 @@ const GroupChatList = ({ onSelectGroup }) => {
   const userId = localStorage.getItem("userId");
 
   const [groups, setGroups] = useState([]);
-  const ChatListRef = useRef(null);
+  const Chat
 
   useEffect(() => {
     // Assuming this endpoint fetches groups user is a member of
@@ -20,26 +20,16 @@ const GroupChatList = ({ onSelectGroup }) => {
         console.error("Error fetching groups:", error);
       });
   }, []);
-  useEffect(() => {
-    ChatListRef.current.scrollTop = ChatListRef.current.scrollHeight;
-  }, [groups]);
 
   return (
-    <div className="group-chat-listm bg-gray-100 h-full overflow-y-auto flex-1">
-      <h3 className="text-lg font-semibold px-4 py-2 border-b border-gray-300">
-        Groups
-      </h3>
-      <ul className="p-2">
+    <div className="group-chat-list">
+      <h3>Groups</h3>
+      <ul>
         {groups.map((group) => (
-          <li
-            key={group._id}
-            className="px-4 py-2 border-b cursor-pointer hover:bg-gray-200"
-            onClick={() => onSelectGroup(group._id ,group.name)}
-          >
+          <li key={group._id} onClick={() => onSelectGroup(group._id)}>
             {group.name}
           </li>
         ))}
-        <div ref={ChatListRef} />
       </ul>
     </div>
   );

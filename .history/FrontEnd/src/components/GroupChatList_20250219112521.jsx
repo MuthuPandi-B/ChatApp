@@ -34,7 +34,7 @@ const GroupChatList = ({ onSelectGroup }) => {
           <li
             key={group._id}
             className="px-4 py-2 border-b cursor-pointer hover:bg-gray-200"
-            onClick={() => onSelectGroup(group._id ,group.name)}
+            onClick={() => onSelectGroup(group._id group.name)}
           >
             {group.name}
           </li>

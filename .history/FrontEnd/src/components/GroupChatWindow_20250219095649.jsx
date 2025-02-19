@@ -98,7 +98,7 @@ const GroupChatWindow = ({ selectedGroup }) => {
 
   const sendMessage = () => {
     if (message.trim() !== '') {
-      console.log('sendGroupMessage', { groupId: selectedGroup, userId: user._id, message });
+      
       socket.emit('sendGroupMessage', { groupId: selectedGroup, userId: user._id, message });
       console.log('sendGroupMessage', { groupId: selectedGroup, userId: user._id, message });
       setMessage('');
