@@ -26,7 +26,7 @@ const io = new Server(server, {
 app.use(express.json());
 app.use(cors(
   {
-    origin: ['http://localhost:5175','https://chat-app-beta-ecru.vercel.app/'],
+    origin: ['http://localhost:3000',https://chat-app-beta-ecru.vercel.app/],
     credentials: true,
   }
 ));

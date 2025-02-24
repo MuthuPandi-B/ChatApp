@@ -57,7 +57,7 @@ export const forgotPassword = async (req, res) => {
     //Generate and set reset token
     const resetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     //Send email with reset link
-    const restlink = `https://chat-app-beta-ecru.vercel.app//reset-password/${resetToken}`;
+    const restlink = `http://localhost:5173/reset-password/${resetToken}`;
     // const restlink = `http://localhost:5173/reset-password/${resetToken}`;
     await sendEmail(
       email,
