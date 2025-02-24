@@ -1,0 +1,1 @@
+This Real-time Chat Application is built using the MERN stack (MongoDB, Express, React, Node.js) with Socket.io for real-time messaging. The app allows users to register, log in, and chat with other users in private or group chats. It features role-based access control, password management using Nodemailer. The UI is built with Tailwind CSS for responsiveness and modern styling.
