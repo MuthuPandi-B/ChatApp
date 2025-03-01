@@ -1,8 +1,11 @@
-# React + Vite
+# 💬 Real-Time Chat Application (Frontend)  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of a **full-stack real-time messaging application** built with the **MERN stack** and **Socket.io** for instant communication. The app allows users to **register, log in, and chat** with others through **private or group chats**, featuring **real-time messaging, user authentication, and role-based access control**.  
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features  
+- 🔐 **User Authentication** – Register and log in securely.  
+- 💬 **Private & Group Chats** – Chat one-on-one or in groups.  
+- 🚀 **Real-Time Messaging** – Instant communication with **Socket.io**.  
+- 👤 **Role-Based Access Control** – Different permissions for users and admins.  
+- 📩 **Password Management** – Reset passwords securely using **Nodemailer**.  
+- 🎨 **Responsive UI** – Built with **Tailwind CSS** for a modern look. 
