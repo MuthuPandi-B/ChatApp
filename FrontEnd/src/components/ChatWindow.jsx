@@ -2,7 +2,8 @@ import React, { useState, useEffect,useRef } from 'react';
 import io from 'socket.io-client';
 import Api from '../Api/api';
 
-const socket = io('http://localhost:5000');
+// const socket = io('http://localhost:5000');
+const socket = io('https://chatapp-ha7d.onrender.com');
 
 const ChatWindow = ({ selectedChat ,senderName}) => {
   const [message, setMessage] = useState('');

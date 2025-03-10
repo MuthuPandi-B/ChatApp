@@ -4,7 +4,8 @@ import io from 'socket.io-client';
 import AuthContext from '../contexts/AuthContext';
 import Api from '../Api/api';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://chatapp-ha7d.onrender.com');
+// const socket = io('http://localhost:5000');
 
 const GroupChatWindow = ({ selectedGroup }) => {
   const { user } = useContext(AuthContext);
