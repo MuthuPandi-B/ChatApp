@@ -14,6 +14,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Terms from "./components/Terms";
 import Contact from "./components/Contact";
+import { ToastContainer } from "react-toastify";
 
 
 const App = () => {
@@ -24,10 +25,14 @@ const App = () => {
 
 
   return (
+    
     <AuthProvider>
       <Router>
+    
+
         <Navbar token={token} userName={userName} setToken={setToken} setUserName={setUserName} />
         <Routes>
+          
           <Route path="/" element={<LoginPage setToken={setToken} setUserName={setUserName} />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/group-chat" element={<GroupChatPage />} />
@@ -42,6 +47,7 @@ const App = () => {
         </Routes>
         <Footer userName={userName}/>
       </Router>
+      <ToastContainer position="top-right" autoClose={3000} />
     </AuthProvider>
   );
 };

@@ -51,7 +51,8 @@ const GroupChatPage = () => {
   }, [showCreateModal]);
   //Open modal for creating group
  
-  const handleCreateGroup = async () => {
+  const handleCreateGroup = async (event) => {
+    event.preventDefault();
     try {
       setError(null); // Clear previous errors
 
