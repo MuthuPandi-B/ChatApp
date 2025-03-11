@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: 'https://chatapp-ha7d.onrender.com', // Or the base URL of your backend
-//   baseURL: 'http://localhost:5000', // Or the base URL of your backend
+//   baseURL: 'https://chatapp-ha7d.onrender.com', // Or the base URL of your backend
+  baseURL: 'http://localhost:5000', // Or the base URL of your backend
 });
 Api.interceptors.request.use((req) => {
     const token = localStorage.getItem('token');

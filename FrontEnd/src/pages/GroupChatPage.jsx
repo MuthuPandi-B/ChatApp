@@ -15,6 +15,7 @@ const GroupChatPage = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [refreshList, setRefreshList] = useState(false);  
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 
@@ -89,7 +90,7 @@ const GroupChatPage = () => {
         setMembers([]);
         setError("");
        
-        navigate("/group-chat");
+       setRefreshList((prev) => !prev);
       } else {
         // Handle unexpected response
         setError("Unexpected response from the server. Please try again.");
@@ -155,6 +156,7 @@ const GroupChatPage = () => {
             <GroupChatList
               onSelectGroup={handleSelectGroup}
               OnEditGroup={handleEditGroup}
+              refreshList={refreshList}
             />
             {/* {showCreateModal && (
               <div className="modal">
